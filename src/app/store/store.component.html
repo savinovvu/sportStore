@@ -19,7 +19,7 @@
 
     <button *ngFor="let category of categories" class="btn btn-primary btn-block"
             [class.active]="category ===selectedCategory" (click)="changeCategory(category)">
-        {{category}}
+      {{category}}
     </button>
 
   </div>
@@ -32,6 +32,25 @@
     </span>
       </h4>
       <div class="card-text p-a-1">{{product.description}}</div>
+    </div>
+    <div class="form-inline pull-xl-left m-r-1">
+      <select class="form-control"
+              (change)="changePageSize($event.target.value)">
+        <option value="1">1 per Page</option>
+        <option value="2">2 per Page</option>
+        <option value="3">6 per Page</option>
+        <option value="8">8 per Page</option>
+
+      </select>
+      <label>Введите желаемое число продуктов:
+        <input type="number" name="any" (input)="changePageSize($event.target.value)" class="form-control">
+      </label>
+    </div>
+    <div class="btn-group pull-xs-right">
+      <button *ngFor="let page of pageNumbers" (click)="changePage(page)"
+              class="btn btn-outline-primary" [class.active]="page == selectedPage">
+        {{page}}
+      </button>
     </div>
   </div>
 
