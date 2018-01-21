@@ -17,8 +17,8 @@ export class ProductRepository {
   }
 
 
-  getProducts(): Product[] {
-    return this.products;
+  getProducts(selectedCategory: any): Product[] {
+    return this.products.filter(v=> v.category === selectedCategory);
   }
 
   getCategories(): string[] {
