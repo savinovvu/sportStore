@@ -25,7 +25,7 @@ export class StoreComponent implements OnInit {
 
   get products(): Product[] {
     let pageIndex = (this.selectedPage - 1) * this.productsPerPage;
-    return this.repository.getProducts(this.selectedCategory).slice(pageIndex, pageIndex + this.productsPerPage);
+    return this.repository.getProduct(this.selectedCategory).slice(pageIndex, pageIndex + this.productsPerPage);
   }
 
   get categories(): string[] {
@@ -47,7 +47,7 @@ export class StoreComponent implements OnInit {
 
   get pageCount(): number {
     return Math.ceil(this.repository
-      .getProducts(this.selectedCategory).length / this.productsPerPage);
+      .getProduct(this.selectedCategory).length / this.productsPerPage);
   }
 
   addProductToCart(product: Product) {

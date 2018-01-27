@@ -20,7 +20,7 @@ export class RestDataSource {
 
   authenticate(user: string, pass: string): Observable<boolean> {
     let observable = this.httpClient.post(this.baseUrl + 'login', {name: user, password: pass})
-      .map((response:any) => {
+      .map((response: any) => {
         this.auth_token = response.success ? response.token : null;
         return response.success;
       });
@@ -45,4 +45,42 @@ export class RestDataSource {
       .set('Authorization', `Bearer<${this.auth_token}>`);
     return headers;
   }
+
+  saveProduct(product: Product): Observable<Product> {
+    let url: string = this.baseUrl + 'products';
+    const headers = this.getHeaders();
+    return this.httpClient.post(url, product, {headers});
+  }
+
+  updateProduct(product: Product): Observable<Product> {
+    let url: string = this.baseUrl + 'products';
+    const headers = this.getHeaders();
+    return this.httpClient.put(url, product, {headers});
+  }
+
+  deleteProduct(id: number): Observable<Product> {
+    let url: string = this.baseUrl + `products/` + id;
+    const headers = this.getHeaders();
+    return this.httpClient.delete(url, {headers});
+  }
+
+  getOrders(): Observable<Order[]> {
+    let url: string = this.baseUrl + `orders`;
+    const headers = this.getHeaders();
+    return <Observable<Order[]>>this.httpClient.get(url, {headers});
+  }
+
+  deleteOrder(id: number): Observable<Order> {
+    let url: string = this.baseUrl + `orders/` + id;
+    const headers = this.getHeaders();
+    return <Observable<Order>> this.httpClient.delete(url, {headers});
+  }
+
+  updateOrder(order: Order): Observable<Order>{
+    let url: string = this.baseUrl + `orders`;
+    const headers = this.getHeaders();
+    return <Observable<Order>>this.httpClient.put(url, order, {headers});
+  }
+
+
 }
