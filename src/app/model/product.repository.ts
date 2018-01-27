@@ -17,8 +17,11 @@ export class ProductRepository {
     });
   }
 
+  getProduct(id: number): Product {
+    return this.products.find(p => p.id == id);
+  }
 
-  getProduct(selectedCategory: any): Product[] {
+  getProducts(selectedCategory: any): Product[] {
     if (selectedCategory == null) {
       return this.products;
     }
@@ -44,8 +47,8 @@ export class ProductRepository {
 
   deleteProduct(id: number) {
     this.dataSource.deleteProduct(id).subscribe(p =>
-    this.products.splice(this.products
-      .findIndex(p => (p.id == id), 1), 1)
+      this.products.splice(this.products
+        .findIndex(p => (p.id == id), 1), 1)
     );
   }
 
